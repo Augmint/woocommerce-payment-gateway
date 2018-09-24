@@ -63,7 +63,7 @@ class WC_Gateway_Augmint_Request
      */
     public function get_request_url($order, $sandbox = false)
     {
-        $this->endpoint = $sandbox ? 'https://www.augmint.org/transfer?network_id=4&' : 'https://www.augmint.org/transfer?network_id=1&';
+        $this->endpoint = $sandbox ? 'https://www.augmint.org/transfer/request?network_id=4&' : 'https://www.augmint.org/transfer/request?network_id=1&';
         $augmint_args    = $this->get_augmint_args($order);
 
         WC_Gateway_Augmint::log('Augmint Request Args for order ' . $order->get_order_number() . ': ' . wc_print_r($augmint_args, true));
