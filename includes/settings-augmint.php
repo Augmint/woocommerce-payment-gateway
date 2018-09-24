@@ -28,14 +28,6 @@ return array(
         'description' => __('This controls the description which the user sees during checkout.', 'augmint'),
         'default'     => __("Pay via Augmint; you can pay with your credit card if you don't have a Augmint account.", 'augmint'),
     ),
-    'email'                 => array(
-        'title'       => __('Augmint email', 'augmint'),
-        'type'        => 'email',
-        'description' => __('Please enter your Augmint email address; this is needed in order to take payment.', 'augmint'),
-        'default'     => get_option('admin_email'),
-        'desc_tip'    => true,
-        'placeholder' => 'you@youremail.com',
-    ),
     'store_settings'              => array(
         'title'       => __('Store settings', 'augmint'),
         'type'        => 'title',
