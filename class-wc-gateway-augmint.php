@@ -56,7 +56,8 @@ class WC_Gateway_Augmint extends WC_Payment_Gateway
         self::$log_enabled    = $this->debug;
 
         if ($this->testmode) {
-            $this->description .= ' ' . sprintf(__('SANDBOX ENABLED. You can use sandbox testing accounts only. See the <a href="%s">Augmint Sandbox Testing Guide</a> for more details.', 'augmint'), '');
+            /* translators: %s: URL */
+            $this->description .= ' ' . sprintf(__('TEST payment. You can use Rinkeby test ETH and A-EUR without value. No real order will be fulfilled.', 'augmint'), '');
             $this->description  = trim($this->description);
         }
 
