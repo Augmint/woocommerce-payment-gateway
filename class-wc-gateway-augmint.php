@@ -74,7 +74,6 @@ class WC_Gateway_Augmint extends WC_Payment_Gateway
         include_once dirname(__FILE__) . '/includes/class-wc-gateway-augmint-response-handler.php';
 
         $augmint_request = new WC_Gateway_Augmint_Response_Handler($this->debug);
-
     }
 
     /**
@@ -191,7 +190,7 @@ class WC_Gateway_Augmint extends WC_Payment_Gateway
             get_woocommerce_currency(),
             apply_filters(
                 'woocommerce_augmint_supported_currencies',
-                array( 'AUD', 'BRL', 'CAD', 'MXN', 'NZD', 'HKD', 'SGD', 'USD', 'EUR', 'JPY', 'TRY', 'NOK', 'CZK', 'DKK', 'HUF', 'ILS', 'MYR', 'PHP', 'PLN', 'SEK', 'CHF', 'TWD', 'THB', 'GBP', 'RMB', 'RUB', 'INR' )
+                array( 'EUR', 'AEUR' )
             ),
             true
         );
@@ -301,7 +300,6 @@ class WC_Gateway_Augmint extends WC_Payment_Gateway
         $order = wc_get_order($order_id);
 
         if ('augmint' === $order->get_payment_method() && 'pending' === get_post_meta($order->get_id(), '_augmint_status', true) && $order->get_transaction_id()) {
-
         }
     }
 
