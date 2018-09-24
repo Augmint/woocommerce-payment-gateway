@@ -11,14 +11,14 @@ add_filter('woocommerce_currency_symbol', 'add_augmint_currency_symbol', 10, 2);
 function add_augmint_gateway_class($methods)
 {
     include __DIR__ . '/class-wc-gateway-augmint.php';
-    
+
     $methods[] = 'WC_Gateway_Augmint';
     return $methods;
 }
 
 function add_augmint_currency($currencies)
 {
-    $currencies['AEUR'] = __('Augmint EUR', 'augmint');
+    $currencies['A-EUR'] = __('Augmint EUR', 'augmint');
 
     return $currencies;
 }
@@ -26,7 +26,7 @@ function add_augmint_currency($currencies)
 function add_augmint_currency_symbol($currency_symbol, $currency)
 {
     switch ($currency) {
-        case 'AEUR': $currency_symbol = 'A€'; break;
+        case 'A-EUR': $currency_symbol = 'A€'; break;
     }
 
     return $currency_symbol;

@@ -190,7 +190,7 @@ class WC_Gateway_Augmint extends WC_Payment_Gateway
             get_woocommerce_currency(),
             apply_filters(
                 'woocommerce_augmint_supported_currencies',
-                array( 'EUR', 'AEUR' )
+                array( 'EUR', 'AEUR', 'A-EUR' )
             ),
             true
         );
