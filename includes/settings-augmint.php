@@ -11,14 +11,14 @@ return array(
     'enabled'               => array(
         'title'   => __('Enable/Disable', 'augmint'),
         'type'    => 'checkbox',
-        'label'   => __('Enable Augmint Standard', 'augmint'),
+        'label'   => __('Enable Augmint Payments', 'augmint'),
         'default' => 'no',
     ),
     'title'                 => array(
         'title'       => __('Title', 'augmint'),
         'type'        => 'text',
         'description' => __('This controls the title which the user sees during checkout.', 'augmint'),
-        'default'     => __('Augmint', 'augmint'),
+        'default'     => __('Augmint A-EUR payment', 'augmint'),
         'desc_tip'    => true,
     ),
     'description'           => array(
@@ -26,15 +26,7 @@ return array(
         'type'        => 'text',
         'desc_tip'    => true,
         'description' => __('This controls the description which the user sees during checkout.', 'augmint'),
-        'default'     => __("Pay via Augmint; you can pay with your credit card if you don't have a Augmint account.", 'augmint'),
-    ),
-    'email'                 => array(
-        'title'       => __('Augmint email', 'augmint'),
-        'type'        => 'email',
-        'description' => __('Please enter your Augmint email address; this is needed in order to take payment.', 'augmint'),
-        'default'     => get_option('admin_email'),
-        'desc_tip'    => true,
-        'placeholder' => 'you@youremail.com',
+        'default'     => __("Pay via Augmint. It's only a few clicks to get Augmint EUR if you have ETH.", 'augmint'),
     ),
     'store_settings'              => array(
         'title'       => __('Store settings', 'augmint'),
@@ -44,21 +36,22 @@ return array(
     'store_name'                 => array(
         'title'       => __('Name', 'augmint'),
         'type'        => 'text',
-        'description' => '',
+        'description' => 'Name of store to be displayed on Augmint site during payment.',
         'default'     => __('Augmint', 'augmint'),
         'desc_tip'    => true,
     ),
-    'augmint_address'                 => array(
-        'title'       => __('Augmint address', 'augmint'),
+    'store_ethereum_address'   => array(
+        'title'       => __('Store ethereum address', 'augmint'),
         'type'        => 'text',
-        'description' => '',
+        'description' => 'The ethereum address which will receive the payments.',
         'default'     => '',
+        'placeholder' => '0x0...',
         'desc_tip'    => true,
     ),
-    'narrative'                 => array(
-        'title'       => __('Narrative', 'augmint'),
+    'payment_reference' => array(
+        'title'       => __('Payment reference', 'augmint'),
         'type'        => 'text',
-        'description' => '',
+        'description' => 'The reference which will be included in Augmint transfer. NB: this reference will be public on blockchain. Use {order_id} to insert the order number',
         'default'     => __('Order number: {order_id}', 'augmint'),
         'desc_tip'    => true,
     ),

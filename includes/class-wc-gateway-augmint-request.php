@@ -107,17 +107,17 @@ class WC_Gateway_Augmint_Request
         $token = md5($order->get_id() . $order->get_cart_hash());
         $order->add_order_note('Token ' . $token);
 
-        update_post_meta($order->get_id(), 'augmint_beneficiary_address', $this->gateway->get_option('augmint_address'));
+        update_post_meta($order->get_id(), 'augmint_beneficiary_address', $this->gateway->get_option('store_ethereum_address'));
 
         return array_merge(
             array(
                 'order_id' => $order->get_id(),
                 'token' => $token,
-                'beneficiary_address' => $this->gateway->get_option('augmint_address'),
+                'beneficiary_address' => $this->gateway->get_option('store_ethereum_address'),
                 'beneficiary_name' => $this->gateway->get_option('store_name'),
                 'amount' => $order->get_total(),
                 'currency_code' => 'AEUR',
-                'reference' => str_replace(array('{order_id}'), array($order->get_id()), $this->gateway->get_option('narrative')),
+                'reference' => str_replace(array('{order_id}'), array($order->get_id()), $this->gateway->get_option('payment_reference')),
                 'notify_url' => $this->gateway->get_return_url($order)
             )
         );
