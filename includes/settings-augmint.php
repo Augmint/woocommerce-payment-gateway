@@ -40,17 +40,17 @@ return array(
         'default'     => __('Augmint', 'augmint'),
         'desc_tip'    => true,
     ),
-    'augmint_address'                 => array(
-        'title'       => __('Augmint address', 'augmint'),
+    'store_ethereum_address'   => array(
+        'title'       => __('Store ethereum address', 'augmint'),
         'type'        => 'text',
         'description' => '',
         'default'     => '',
         'desc_tip'    => true,
     ),
-    'narrative'                 => array(
-        'title'       => __('Narrative', 'augmint'),
+    'payment_reference' => array(
+        'title'       => __('Payment reference', 'augmint'),
         'type'        => 'text',
-        'description' => '',
+        'description' => 'The reference which will be included in Augmint transfer. NB: this reference will be public on blockchain. Use {order_id} to insert the order number',
         'default'     => __('Order number: {order_id}', 'augmint'),
         'desc_tip'    => true,
     ),
