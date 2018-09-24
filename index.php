@@ -10,7 +10,7 @@ add_filter('woocommerce_currency_symbol', 'add_augmint_currency_symbol', 10, 2);
 
 function add_augmint_gateway_class($methods)
 {
-    include __DIR__ . '/class-wc-gateway-augmint.php';
+    include_once __DIR__ . '/class-wc-gateway-augmint.php';
 
     $methods[] = 'WC_Gateway_Augmint';
     return $methods;
