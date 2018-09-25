@@ -23,11 +23,19 @@ class WC_Gateway_Augmint_Response_Handler extends WC_Gateway_Augmint_Response
      * @param bool   $sandbox Whether to use sandbox mode or not.
      * @param string $identity_token Identity token for PDT support.
      */
-    public function __construct($sandbox = false)
+    public function __construct($sandbox = false, $gateway = null)
     {
         add_action('woocommerce_thankyou_augmint', array( $this, 'check_response' ));
 
         $this->sandbox        = $sandbox;
+        $this->gateway        = $gateway;
+    }
+
+    public function validation_failed()
+    {
+        echo __("Payment validation failed!", 'Augmint');
+
+        return false;
     }
 
     /**
@@ -59,20 +67,25 @@ class WC_Gateway_Augmint_Response_Handler extends WC_Gateway_Augmint_Response
         $amount = wc_clean(wp_unslash($_REQUEST['amount']));
 
         if ($order->get_total() != $amount) {
-            return false;
+            return $this->validation_failed();
         }
 
         $network_id = wc_clean(wp_unslash($_REQUEST['network_id']));
         $beneficiary_address = wc_clean(wp_unslash($_REQUEST['beneficiary_address']));
 
         if (get_post_meta($order_id, 'augmint_network_id', true) != $network_id) {
-            return false;
+            return $this->validation_failed();
         }
         if (get_post_meta($order_id, 'augmint_beneficiary_address', true) != $beneficiary_address) {
-            return false;
+            return $this->validation_failed();
         }
         
         $currency_code = wc_clean(wp_unslash($_REQUEST['currency_code']));
+
+        if ($currency_code != 'AEUR') {
+            return $this->validation_failed();
+        }
+
         $tx_hash = wc_clean(wp_unslash($_REQUEST['tx_hash']));
 
         // the meta_key 'color' with the meta_value 'blue'
@@ -89,13 +102,44 @@ class WC_Gateway_Augmint_Response_Handler extends WC_Gateway_Augmint_Response
         $query = new WP_Query($query_args);
         
         if ($query->have_posts()) {
-            return false;
+            return $this->validation_failed();
         }
 
         $order->add_order_note('Tx hash: ' . $tx_hash);
 
         $this->payment_complete($order, $tx_hash, __('Payment completed', 'augmint'));
-        
+
         update_post_meta($order->get_id(), 'augmint_tx_hash', $tx_hash);
+
+        $order_status_change = $this->gateway->get_option('order_status_after_payment');
+
+        if ('_default' == $order_status_change) {
+            return true;
+        }
+        if ('_virtual_payment_received' == $order_status_change) {
+            $is_virtual = true;
+
+            if (count($this->get_items()) > 0) {
+                foreach ($this->get_items() as $item) {
+                    if ($item->is_type('line_item')) {
+                        $product = $item->get_product();
+
+                        if (! $product) {
+                            continue;
+                        }
+
+                        $is_virtual &= $product->is_virtual();
+                    }
+                }
+            }
+
+            if ($is_virtual) {
+                $order->set_status('payment_received');
+            }
+
+            return true;
+        }
+
+        $order->set_status($order_status_change);
     }
 }

@@ -55,6 +55,18 @@ return array(
         'default'     => __('Order number: {order_id}', 'augmint'),
         'desc_tip'    => true,
     ),
+    'order_status_after_payment' => array(
+        'title'       => __('Order status after payment', 'augmint'),
+        'type'        => 'select',
+        'default'     => __('Order number: {order_id}', 'augmint'),
+        'desc_tip'    => true,
+        'options' =>  array(
+            '_default' => __('Default behavior', 'augmint'),
+            'processing' => __('Processing', 'augmint'),
+            'payment_received' => __('Payment received', 'augmint'),
+            '_virtual_payment_received' => __('payment received only for virtual products ', 'augmint'),
+        )
+    ),
     'advanced'              => array(
         'title'       => __('Advanced options', 'augmint'),
         'type'        => 'title',

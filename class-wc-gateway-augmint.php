@@ -74,7 +74,7 @@ class WC_Gateway_Augmint extends WC_Payment_Gateway
 
         include_once dirname(__FILE__) . '/includes/class-wc-gateway-augmint-response-handler.php';
 
-        $augmint_request = new WC_Gateway_Augmint_Response_Handler($this->debug);
+        $augmint_request = new WC_Gateway_Augmint_Response_Handler($this->debug, $this);
     }
 
     /**
@@ -177,7 +177,7 @@ class WC_Gateway_Augmint extends WC_Payment_Gateway
      */
     protected function get_icon_image($country)
     {
-        return apply_filters('woocommerce_augmint_icon', '');
+        return apply_filters('woocommerce_augmint_icon', plugin_dir_url(__FILE__) . 'assets/images/logo.png');
     }
 
     /**

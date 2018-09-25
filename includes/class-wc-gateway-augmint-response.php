@@ -23,6 +23,13 @@ abstract class WC_Gateway_Augmint_Response
     protected $sandbox = false;
 
     /**
+     * Payment Gateway class
+     *
+     * @var WC_Gateway_Augmint
+     */
+    protected $gateway = null;
+
+    /**
      * Complete order, add transaction ID and note.
      *
      * @param  WC_Order $order Order object.
