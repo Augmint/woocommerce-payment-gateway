@@ -108,6 +108,16 @@ class WC_Gateway_Augmint extends WC_Payment_Gateway
         }
     }
 
+    public function get_return_url($order = null)
+    {
+        return str_replace('https:', 'http:', add_query_arg(array('wc-api' => 'WC_Gateway_Augmint'), home_url('/')));
+    }
+
+    public function get_thankyou_url($order)
+    {
+        return parent::get_return_url($order);
+    }
+
     /**
      * Processes and saves options.
      * If there is an error thrown, will continue to save and validate fields, but will leave the erroring field out.
