@@ -115,7 +115,7 @@ class WC_Gateway_Augmint_Response_Handler extends WC_Gateway_Augmint_Response
         $order_status_change = $this->gateway->get_option('order_status_after_payment');
 
         if ('_default' == $order_status_change) {
-            return true;
+            // do nothing
         } else if ('_virtual_payment_received' == $order_status_change) {
             $is_virtual = true;
 
@@ -136,8 +136,6 @@ class WC_Gateway_Augmint_Response_Handler extends WC_Gateway_Augmint_Response
             if ($is_virtual) {
                 $order->set_status('payment_received');
             }
-
-            return true;
         } else {
             $order->set_status($order_status_change);
         }
