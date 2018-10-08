@@ -153,7 +153,7 @@ class WC_Gateway_Augmint extends WC_Payment_Gateway
             $icon_html .= '<img src="' . esc_attr($i) . '" alt="' . esc_attr__('Augmint acceptance mark', 'augmint') . '" />';
         }
 
-        $icon_html .= sprintf('<a href="%1$s" class="about_augmint" onclick="javascript:window.open(\'%1$s\',\'WIAugmint\',\'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700\'); return false;">' . esc_attr__('What is Augmint?', 'augmint') . '</a>', esc_url($this->get_icon_url(WC()->countries->get_base_country())));
+        $icon_html .= sprintf('<a href="%1$s" class="about_augmint" onclick="javascript:window.open(\'%1$s\',\'WIAugmint\',\'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700\'); return false;">' . esc_attr__('What is Augmint?', 'augmint') . '</a>', esc_url('https://www.augmint.org/'));
 
         return apply_filters('woocommerce_gateway_icon', $icon_html, $this->id);
     }
