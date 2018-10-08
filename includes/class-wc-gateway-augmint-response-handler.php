@@ -140,7 +140,7 @@ class WC_Gateway_Augmint_Response_Handler extends WC_Gateway_Augmint_Response
             $order->set_status($order_status_change);
         }
 
-        return wp_safe_redirect($this->gateway->get_thankyou_url());
+        return wp_safe_redirect($this->gateway->get_thankyou_url($order));
     }
 
     public function thankyou_page()
